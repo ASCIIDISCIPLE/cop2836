@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 
 require('dotenv').config();
@@ -22,6 +21,7 @@ const resolvers = {
     issueDelete: issue.delete,
   },
   GraphQLDate,
+
 };
 
 const server = new ApolloServer({
@@ -34,7 +34,8 @@ const server = new ApolloServer({
 });
 
 function installHandler(app) {
-  server.applyMiddleware({ app, path: '/graphql' });
+  server.applyMiddleware({app, path: '/graphql'});
+
 }
 
 module.exports = { installHandler };

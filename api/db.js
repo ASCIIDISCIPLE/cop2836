@@ -1,14 +1,14 @@
-
 require('dotenv').config();
 
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require ('mongodb');
 
 const url = process.env.DB_URL || 'mongodb://localhost/cop2836';
+
 
 let db;
 
 async function connectToDb() {
-  const client = new MongoClient(url, { useNewUrlParser: true });
+  const client = new MongoClient(url, { useNewUrlParser: true});
   await client.connect();
   console.log('Connected to MongoDB at', url);
   db = client.db();

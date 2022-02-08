@@ -1,13 +1,12 @@
-
 const { UserInputError } = require('apollo-server-express');
 const { getDb, getNextSequence } = require('./db.js');
 
-async function list(_, { status, effortMin, effortMax }) {
+async function list(_j, { status, effortMin, effortMax }){
   const db = getDb();
   const filter = {};
   if (status) filter.status = status;
 
-  if (effortMin !== undefined || effortMax !== undefined) {
+  if(effortMin !== undefined || effortMax !== undefined) {
     filter.effort = {};
     if (effortMin !== undefined) filter.effort.$gte = effortMin;
     if (effortMax !== undefined) filter.effort.$lte = effortMax;
@@ -43,26 +42,27 @@ async function add(_, { issue }) {
   const result = await db.collection('issues').insertOne(issue);
 
   const savedIssue = await db.collection('issues').findOne({ _id: result.insertedId });
+
   return savedIssue;
 }
 
-async function get(_, { id }) {
-  const db = getDb();
-  const issue = await db.collection('issues').findOne({ id });
-  return issue;
-}
+   async function get(_, { id }) {
+     const db = getDb();
+     const issue = await db.collection('issues').findOne({ id });
+     return issue;
+   }
 
-async function update(_, { id, changes }) {
-  const db = getDb();
-  if (changes.title || changes.status || changes.owner) {
-    const issue = await db.collection('issues').findOne({ id });
-    Object.assign(issue, changes);
-    validate(issue);
-  }
-  await db.collection('issues').updateOne({ id }, { $set: changes });
-  const savedIssue = await db.collection('issues').findOne({ id });
-  return savedIssue;
-}
+   async function update(_, { id, changes }) {
+     const db = getDb();
+     if (changes.title || changes.status || changes.owner) {
+       const issue = await db.collection('issues').findOne({ id });
+       Object.assign(issue, changes);
+       validate(issue);
+     }
+     await db.collection('issues').updateOne({ id }, { $set: changes });
+     const savedIssue = await db.collection('issues').findOne({ id });
+     return savedIssue;
+   }
 
 async function remove(_, { id }) {
   const db = getDb();

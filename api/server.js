@@ -1,6 +1,6 @@
 
-require('dotenv').config();
-const express = require('express');
+ require('dotenv').config();
+const express = require ('express');
 const { connectToDb } = require('./db.js');
 const { installHandler } = require('./api_handler.js');
 
@@ -10,7 +10,8 @@ installHandler(app);
 
 const port = process.env.API_SERVER_PORT || 3000;
 
-(async function () {
+
+(async function (){
   try {
     await connectToDb();
     app.listen(port, function() {

@@ -1,4 +1,3 @@
-
 const path = require('path');
 
 module.exports = {
@@ -16,6 +15,7 @@ module.exports = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
+
     ],
   },
   optimization: {

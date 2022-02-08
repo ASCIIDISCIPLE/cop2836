@@ -1,8 +1,8 @@
 
 import React from 'react';
+import { Form, FormControl, FormGroup, ControlLabel, Button, } from 'react-bootstrap';
 
 export default class IssueAdd extends React.Component {
-
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,7 +13,7 @@ export default class IssueAdd extends React.Component {
     const form = document.forms.issueAdd;
     const issue = {
       owner: form.owner.value,
-      title: form.title.value,
+       title: form.title.value,
       due: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 10),
     }
     const { createIssue } = this.props;
@@ -23,11 +23,22 @@ export default class IssueAdd extends React.Component {
 
   render() {
     return (
-      <form name="issueAdd" onSubmit={this.handleSubmit}>
-        <input type="text" name="owner" placeholder="Owner"/>
-        <input type="text" name="title" placeholder="Title"/>
-        <button type="submit">Add</button>
-      </form>
+      <Form inline name="issueAdd" onSubmit={this.handleSubmit}>
+
+       <FormGroup>
+       <ControlLabel>Owner:</ControlLabel>
+       {' '}
+       <FormControl type="text" name="owner"/>
+       </FormGroup>
+        {' '}
+        <FormGroup>
+        <ControlLabel>Title:</ControlLabel>
+        {' '}
+        <FormControl type="text" name="title"/>
+        </FormGroup>
+         {' '}
+         <Button bsStyle="primary" type="submit">Add</Button>   
+      </Form>
     );
   }
 }

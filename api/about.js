@@ -1,9 +1,8 @@
-
 let aboutMessage = 'Issue Tracker API v1.0';
 
-function setMessage(_, { message }) {
+function setMessage(_, {message}){
   aboutMessage = message;
-  return aboutMessage;
+   return aboutMessage;
 }
 
 function getMessage() {
